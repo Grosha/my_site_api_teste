@@ -52,3 +52,11 @@ class TestSendReport:
         assert response.get('status') == 404, 'Incorrect status code when send empty report'
         assert response.get('message') == 'Report is empty', \
             'Incorrect massage when send send empty report'
+
+    def test_send_report_without_report(self):
+        my_site_report = MySiteReport(priority=4)
+        response = my_site.submit_report(headers=headers, report=my_site_report.report)
+
+        assert response.get('status') == 404, 'Incorrect status code when send empty report'
+        assert response.get('message') == 'Object report is not presence', \
+            'Incorrect massage when no send report object'
