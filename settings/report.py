@@ -13,7 +13,8 @@ class Report(object):
         self._device_info = ''
         self._username = ''
         self._region = ''
-        # self.pre_condition = ''
+        self._app_name = ''
+        self._version_app = ''
         self._crash_log_file = None
 
     def add_title(self, text):
@@ -52,6 +53,14 @@ class Report(object):
         self._crash_log_file = file
         return self
 
+    def add_app_name(self, name):
+        self._app_name = name
+        return self
+
+    def add_app_version(self, version):
+        self._version_app = version
+        return self
+
     @property
     def report(self):
         return json.dumps(self, cls=JSONEncoderWithoutModificator)
@@ -70,11 +79,19 @@ class MySiteReport(object):
 
 
 default_bug = Report()\
-            .add_title('title')\
-            .add_username('username')\
-            .add_device('device')\
-            .add_os('android')\
+            .add_title('Application crashes if change application to another after message was sent to the friend in chat')\
+            .add_app_name('WOT Assistance')\
+            .add_app_version('3.2.1(13991)')\
+            .add_username('chicago_bulls')\
+            .add_device('Samsung s10+')\
+            .add_os('android 9.1')\
             .add_region('usa')\
-            .add_str('step 1')\
-            .add_ar('win')\
-            .add_er('lose')
+            .add_str('1. autorize user\n'
+                     '2. select chat category in menu\n'
+                     '3. select one of your friends\n'
+                     '4. send message to him\n'
+                     '5. via resent app change focus to another device application\n'
+                     '6. return to the WOT Assistance app via resent apps')\
+            .add_ar('Application crashes')\
+            .add_er('Opened screen with sent message to your friend')\
+            .attach_file('crash.file')
