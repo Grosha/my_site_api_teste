@@ -15,7 +15,7 @@ class Report(object):
         self._region = ''
         self._app_name = ''
         self._version_app = ''
-        self._crash_log_file = None
+        self._file = None
 
     def add_title(self, text):
         self._title = text
@@ -50,7 +50,7 @@ class Report(object):
         return self
 
     def attach_file(self, file):
-        self._crash_log_file = file
+        self._file = file
         return self
 
     def add_app_name(self, name):
